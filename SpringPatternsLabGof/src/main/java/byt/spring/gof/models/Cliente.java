@@ -46,6 +46,14 @@ public class Cliente implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 
 	@Override
 	public int hashCode() {
