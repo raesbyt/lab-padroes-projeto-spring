@@ -3,6 +3,7 @@ package byt.spring.gof.models;
 import java.io.Serializable;
 import java.util.Objects;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,16 +11,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+@Schema(description = "Dados do cliente")
 @Entity
 @Table(name = "tb_cliente")
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Schema(description = "ID único do cliente", example = "1")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Schema(description = "Nome completo do cliente", example = "Nome Cliente")
 	private String nome;
 	
+	@Schema(description = "Endereço completo do cliente")
 	@ManyToOne
 	private Endereco endereco;
 	

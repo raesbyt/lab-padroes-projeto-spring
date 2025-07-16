@@ -3,6 +3,7 @@ package byt.spring.gof.models;
 import java.io.Serializable;
 import java.util.Objects;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -10,6 +11,7 @@ import jakarta.persistence.Id;
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Schema(description = "CEP do cliente", example = "15050305")
 	@Id
 	private String cep;
 	private String logradouro;
