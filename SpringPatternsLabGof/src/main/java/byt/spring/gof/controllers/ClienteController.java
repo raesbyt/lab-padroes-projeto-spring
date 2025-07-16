@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import byt.spring.gof.models.Cliente;
-import byt.spring.gof.repositories.ClienteRepository;
+import byt.spring.gof.strategy.ClienteStrategy;
 
 @RestController
 @RequestMapping(value = "/cliente")
 public class ClienteController {
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteStrategy clienteStrategy;
 	
 	@GetMapping
 	public ResponseEntity<Iterable<Cliente>> findAll() {
-		return ResponseEntity.ok(clienteRepository.findAll());
+		return ResponseEntity.ok(clienteStrategy.buscarTodos());
 	}
 	
 	@PostMapping
 	public ResponseEntity<Cliente> insert(@RequestBody Cliente cliente) {
-		clienteRepository.save(cliente);
+		clienteStrategy.inserir(cliente);
 		return ResponseEntity.ok(cliente);
 	}
 
