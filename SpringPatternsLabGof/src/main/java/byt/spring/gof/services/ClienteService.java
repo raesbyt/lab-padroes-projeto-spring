@@ -1,5 +1,7 @@
 package byt.spring.gof.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import byt.spring.gof.models.Cliente;
@@ -27,8 +29,8 @@ public class ClienteService implements ClienteStrategy {
 
 	@Override
 	public Cliente buscarPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		return cliente.get();
 	}
 
 	@Override
@@ -38,14 +40,15 @@ public class ClienteService implements ClienteStrategy {
 
 	@Override
 	public void atualizar(Long id, Cliente cliente) {
-		// TODO Auto-generated method stub
-		
+		Optional<Cliente> clienteBd = clienteRepository.findById(id);
+		if (clienteBd.isPresent()) {
+			salvarClienteComCep(cliente);
+		}
 	}
 
 	@Override
 	public void deletar(Long id) {
-		// TODO Auto-generated method stub
-		
+		clienteRepository.deleteById(id);
 	}
 	
 	private void salvarClienteComCep(Cliente cliente) {
@@ -56,7 +59,6 @@ public class ClienteService implements ClienteStrategy {
 					enderecoRepository.save(novoEndereco);
 					return novoEndereco;
 				});
-		
 		cliente.setEndereco(endereco);
 		
 		clienteRepository.save(cliente);
